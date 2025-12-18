@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blessing Tom | Portfolio</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Manrope:wght@300;400;600&family=Space+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <nav>
+        <a href="#home" class="nav-logo">Blessing.</a>
+        <ul class="nav-links">
+            <li><a href="#about"><span>01.</span>About</a></li>
+            <li><a href="#skills"><span>02.</span>Skills</a></li>
+            <li><a href="#contact"><span>04.</span>Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home">
+        <canvas id="flower-canvas"></canvas>
+
+        <div class="hero-content">
+            <h1>Blessing.</h1>
+            <h2>I'm <span class="typing" data-words='["a Web Developer", "a Speaker", "a Compass", "an Analyst"]'></span></h2>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2><span style="color:var(--accent-teal)"></span> About Me</h2>
+
+        <div class="about-content-wrapper">
+            <div class="about-text">
+                <p>
+                    Born and raised in Nigeria. I am a final-year International Relations student at
+                    <a href="https://covenantuniversity.edu.ng/" target="_blank" class="university-highlight">Covenant University</a>,
+                    dedicated to exploring the intersection of Global Structure, Data, and Design. My work is driven by a fascination with how technical frameworks can be leveraged to solve complex, large-scale problems on a global stage.
+                </p>
+
+                <p>A visual storyteller at heart, I am obsessed with the art of communication—both in front of and behind the camera lens. I view photography and videography as more than just media; they are essential tools for documenting the human experience and making technical concepts accessible to the world.</p>
+
+                <p>I am a resilient and multifaceted creator, committed to building inclusive digital experiences. Whether I am architecting a data-driven strategy or capturing a narrative through a shutter, my goal is to create work that is as intelligent as it is impactful.</p>
+            </div>
+
+            <div class="about-image">
+                <img src="my-photo.jpeg.jpg" class="profile-pic" alt="Blessing's Portrait">
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2><span style="color:var(--accent-teal)"></span> Skills</h2>
+
+        <div class="skills-content">
+            <div class="skill-column">
+                <div class="progress">
+                    <div class="skill-title"><span>HTML</span><span>100%</span></div>
+                    <div class="progress-bar-wrap"><div class="progress-bar" style="width: 100%"></div></div>
+                </div>
+                <div class="progress">
+                    <div class="skill-title"><span>CSS</span><span>100%</span></div>
+                    <div class="progress-bar-wrap"><div class="progress-bar" style="width: 100%"></div></div>
+                </div>
+                <div class="progress">
+                    <div class="skill-title"><span>JavaScript</span><span>100%</span></div>
+                    <div class="progress-bar-wrap"><div class="progress-bar" style="width: 100%"></div></div>
+                </div>
+            </div>
+
+            <div class="skill-column">
+                <div class="progress">
+                    <div class="skill-title"><span>Canva</span><span>100%</span></div>
+                    <div class="progress-bar-wrap"><div class="progress-bar" style="width: 100%"></div></div>
+                </div>
+                <div class="progress">
+                    <div class="skill-title"><span>MySQL/MongoDB</span><span>100%</span></div>
+                    <div class="progress-bar-wrap"><div class="progress-bar" style="width: 100%"></div></div>
+                </div>
+                <div class="progress">
+                    <div class="skill-title"><span>Figma</span><span>100%</span></div>
+                    <div class="progress-bar-wrap"><div class="progress-bar" style="width: 100%"></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" style="text-align: center;">
+        <h2>Get In Touch</h2>
+        <div class="social-container">
+            <div class="social-links">
+                <a href="https://github.com/the-btom" target="_blank"><i class="fa-brands fa-github"></i></a>
+                <a href="https://instagram.com/blessingg.tom" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://vsco.co/blessing-tom" target="_blank"><i class="fa-solid fa-camera-retro"></i></a>
+                <a href="mailto:btom.2200485@stu.cu.edu.ng"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <script src="typewriter.js"></script>
+
+    <script>
+        const canvas = document.getElementById('flower-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        drawTree();
+        }
+        window.addEventListener('resize', resizeCanvas);
+
+        function drawLine(x1, y1, x2, y2, thickness, color) {
+        ctx.beginPath();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = thickness;
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+        ctx.closePath();
+        }
+
+        function drawBranch(x, y, len, angle, width) {
+        if (len < 8) return;
+
+        let endX = x + len * Math.cos(angle);
+        let endY = y + len * Math.sin(angle);
+
+        // Teal gradient color
+        let color = `rgba(100, 255, 218, ${width / 5})`;
+
+        drawLine(x, y, endX, endY, width, color);
+
+        let subLen = len * 0.75;
+        let subWidth = width * 0.7;
+
+        drawBranch(endX, endY, subLen, angle - Math.PI / 6, subWidth);
+        drawBranch(endX, endY, subLen, angle + Math.PI / 6, subWidth);
+        }
+
+        function drawTree() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let startX = canvas.width / 2;
+        let startY = canvas.height;
+        let len = 140;
+        let angle = -Math.PI / 2;
+        let width = 8;
+        drawBranch(startX, startY, len, angle, width);
+        }
+
+        // Run immediately
+        resizeCanvas();
+    </script>
+</body>
+</html>
